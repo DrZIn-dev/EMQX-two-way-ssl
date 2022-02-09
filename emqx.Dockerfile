@@ -1,0 +1,1 @@
+FROM  --platform=linux/amd64 emqx/emqx:4.3.11

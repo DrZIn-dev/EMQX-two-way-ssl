@@ -1,0 +1,26 @@
+version: "3.7"
+
+services:
+  emqx:
+    build:
+      context: .
+      dockerfile: emqx.Dockerfile
+    env_file:
+      - .env
+    environment:
+      EMQX_NAME: emqx
+      EMQX_HOST: emqx
+      EMQX_LISTENER__SSL__EXTERNAL: 8883
+      EMQX_LISTENER__SSL__EXTERNAL__KEYFILE: "/etc/certs/${SERVER_CN}.key"
+      EMQX_LISTENER__SSL__EXTERNAL__CERTFILE: "/etc/certs/${SERVER_CN}.pem"
+      EMQX_LISTENER__SSL__EXTERNAL__CACERTFILE: "/etc/certs/ca.pem"
+      EMQX_LISTENER__SSL__EXTERNAL__VERIFY: "verify_peer"
+      EMQX_LISTENER__SSL__EXTERNAL__FAIL_IF_NO_PEER_CERT: "true"
+    volumes:
+      - "./certificates/server/${SERVER_CN}/${SERVER_CN}.key:/etc/certs/${SERVER_CN}.key"
+      - "./certificates/server/${SERVER_CN}/${SERVER_CN}.pem:/etc/certs/${SERVER_CN}.pem"
+      - "./certificates/ca.pem:/etc/certs/ca.pem"
+    ports:
+      - 1883:1883
+      - 8883:8883
+      - 18083:18083
