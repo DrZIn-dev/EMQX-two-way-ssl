@@ -17,8 +17,8 @@ services:
       EMQX_LISTENER__SSL__EXTERNAL__VERIFY: "verify_peer"
       EMQX_LISTENER__SSL__EXTERNAL__FAIL_IF_NO_PEER_CERT: "true"
     volumes:
-      - "./certificates/server/${SERVER_CN}/${SERVER_CN}.key:/etc/certs/${SERVER_CN}.key"
-      - "./certificates/server/${SERVER_CN}/${SERVER_CN}.pem:/etc/certs/${SERVER_CN}.pem"
+      - "./certificates/servers/${SERVER_CN}/${SERVER_CN}.key:/etc/certs/${SERVER_CN}.key"
+      - "./certificates/servers/${SERVER_CN}/${SERVER_CN}.pem:/etc/certs/${SERVER_CN}.pem"
       - "./certificates/ca.pem:/etc/certs/ca.pem"
     ports:
       - 1883:1883
